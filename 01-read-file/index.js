@@ -1,8 +1,7 @@
-const fs = require('fs');
 const path = require('path');
+const fs = require('fs');
+const process = require('process');
 
-fs.readFile(path.resolve(__dirname, './text.txt'), (err, data) => {
-  if(err) throw err;
-  const lines = data.toString().trim();
-  console.log(lines);
-});
+const textFile = fs.createReadStream(path.resolve(__dirname, 'text.txt'));
+
+textFile.on('data', data => process.stdout.write(data.toString()));
