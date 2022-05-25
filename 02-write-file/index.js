@@ -6,7 +6,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 console.log(
-  'Hello! Please write down the things you want to include in the file or enter exit to end the program: '
+  'Hello! Please write down the things you want to include in the file and enter exit or press Ctrl+C to end the program: '
 );
 
 function dataHandler(data) {
