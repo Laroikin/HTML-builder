@@ -1,8 +1,6 @@
 import { readdir } from 'fs/promises';
-import process from 'process';
 import path from 'path';
 import { stat } from 'fs/promises';
-import fs from 'fs';
 import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
