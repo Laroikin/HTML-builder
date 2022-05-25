@@ -1,6 +1,9 @@
-const process = require('process');
-const fs = require('fs');
-const path = require('path');
+import process from 'process';
+import { createWriteStream } from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 console.log(
   'Hello! Please write down the things you want to include in the file or enter exit to end the program: '
@@ -15,13 +18,10 @@ function dataHandler(data) {
   writeStream.write(data);
 }
 
-const writeStream = fs.createWriteStream(
-  path.resolve(__dirname, 'output.txt'),
-  {
-    flags: 'a',
-    encoding: 'utf-8'
-  }
-);
+const writeStream = createWriteStream(path.resolve(__dirname, 'output.txt'), {
+  flags: 'a',
+  encoding: 'utf-8'
+});
 
 process.stdin.on('data', dataHandler);
 
