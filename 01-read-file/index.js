@@ -11,3 +11,4 @@ let textData = '';
 
 textFile.on('data', data => (textData += data));
 textFile.on('end', () => stdout.write(textData));
+textFile.on('error', error => console.log('Error', error.message));
