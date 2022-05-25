@@ -15,13 +15,16 @@ fs.readdir(path.resolve(__dirname, 'styles'), (err, files) => {
 
   for (let i = 0; i < files.length; i++) {
     const pathToFile = path.resolve(__dirname, 'styles', files[i]);
-    if (path.extname(pathToFile) === '.css') {
-      const writeStream = fs.createWriteStream(
-        path.resolve(__dirname, 'project-dist', 'bundle.css'),
-        { flags: 'a' }
-      );
-      const readStream = fs.createReadStream(pathToFile);
-      readStream.on('data', data => writeStream.write(data));
-    }
+    fs.stat(pathToFile, (err, stats) => {
+      if (err) throw err;
+      if (path.extname(pathToFile) === '.css' && stats.isFile()) {
+        const writeStream = fs.createWriteStream(
+          path.resolve(__dirname, 'project-dist', 'bundle.css'),
+          { flags: 'a' }
+        );
+        const readStream = fs.createReadStream(pathToFile);
+        readStream.on('data', data => writeStream.write(data));
+      }
+    });
   }
 });
